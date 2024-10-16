@@ -67,8 +67,6 @@ game.Players:WaitForChild(getgenv().owner).Chatted:Connect(function(msg)
                         local ownerPosition = owner.Character.Head.Position
                         alt.Character:SetPrimaryPartCFrame(CFrame.new(ownerPosition + Vector3.new(positionOffset, 0, 0)))
                         positionOffset = positionOffset + 5 
-                        wait(0.5)
-                        alt.Character.HumanoidRootPart.Anchored = true
                     end
                 end
             end
