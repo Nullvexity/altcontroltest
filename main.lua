@@ -6,18 +6,18 @@ workspace.Ignored.Drop.ChildAdded:Connect(function(drop)
         wait(1)
         local cashPart = drop:FindFirstChildWhichIsA("BillboardGui")
         if cashPart then
-            local cashText = cashPart.TextLabel.Text  -- Get the cash amount as a string
+            local cashText = cashPart.TextLabel.Text  
             local cleanedCash = string.gsub(cashText, "[^%d]", "") 
-            local cashValue = tonumber(cleanedCash) or 0  -- Convert to a number
+            local cashValue = tonumber(cleanedCash) or 0  
             moneydropped = moneydropped + cashValue
-            print("Total Cash Dropped: $" .. moneydropped)  -- Corrected this line
+            print("Total Cash Dropped: $" .. moneydropped)  
         end
     end
 end)
 
 
 game.Players:WaitForChild(getgenv().owner).Chatted:Connect(function(msg)
-    if string.sub(msg, 1, 5) == ".drop2" then
+    if string.sub(msg, 1, 5) == ".drop" then
         local amount = tonumber(string.sub(msg, 7)) or 0
         if amount > 0 then
             drop = true
