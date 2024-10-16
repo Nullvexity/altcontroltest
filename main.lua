@@ -6,7 +6,7 @@ local function updateTotalCash(drop, isAdding)
         local cashPart = drop:WaitForChild("BillboardGui"):WaitForChild("TextLabel")
         if cashPart then
             local cashText = cashPart.Text
-            local cashValue = tonumber(cashText:match("%d+")) 
+            local cashValue = tonumber(cashText:match("%d+,?%d*"):gsub(",", ""))
             if cashValue and isAdding then
                 moneydropped = moneydropped + cashValue
                 print("dropped: " .. moneydropped)
@@ -43,7 +43,7 @@ game.Players:WaitForChild(getgenv().owner).Chatted:Connect(function(msg)
         game:GetService("ReplicatedStorage").MainEvent:FireServer("VIP_CMD","Summon",plr)
 
     elseif msg == ".airlock" then
-        game.Players.LocalPlayer.Character.Humanoid.HipHeight = 15
+        game.Players.LocalPlayer.Character.Humanoid.HipHeight = 10
 
     elseif msg == ".setup" then
         local owner = game.Players:FindFirstChild(getgenv().owner)
@@ -54,8 +54,15 @@ game.Players:WaitForChild(getgenv().owner).Chatted:Connect(function(msg)
                 if altName then
                     local alt = game.Players:FindFirstChild(altName)
                     if alt then
-                        local ownerPosition = owner.Character.HumanoidRootPart.Position
-                        alt.Character.HumanoidRootPart.CFrame = CFrame.new(ownerPosition + Vector3.new(positionOffset, 0, 0))
+                        local anim = Instance.new("Animation")
+                        anim.Parent = alt.Character
+                        anim.AnimationId = "rbxassetid://13850660986"
+
+                        local animload = alt.Character.Humanoid:LoadAnimation(anim)
+                        animload:Play()
+                            
+                        local ownerPosition = owner.Character.Head.Position
+                        alt.Character:SetPrimaryPartCFrame(CFrame.new(ownerPosition + Vector3.new(positionOffset, 0, 0)))
                         positionOffset = positionOffset + 5 
                     end
                 end
