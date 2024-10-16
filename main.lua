@@ -21,7 +21,7 @@ end)
 
 game.Players:WaitForChild(getgenv().owner).Chatted:Connect(function(msg)
     if string.sub(msg, 1, 5) == ".drop" then
-        local amount = tonumber(string.sub(msg, 7)) or 0
+        local amount = tonumber(string.sub(msg, 6)) or 0
         if amount > 0 then
             drop = true
             moneydropped = 0 
@@ -39,8 +39,14 @@ game.Players:WaitForChild(getgenv().owner).Chatted:Connect(function(msg)
         drop = false
 
     elseif string.sub(msg, 1, 6) == ".bring" then
-        local plr = game.Players:WaitForChild(string.sub(msg, 7))
-        game:GetService("ReplicatedStorage").MainEvent:FireServer("VIP_CMD","Summon",plr)
+        local playerName = string.sub(msg, 7)
+        local targetPlayer = game.Players:FindFirstChild(playerName)
+    
+        if targetPlayer then
+            game:GetService("ReplicatedStorage").MainEvent:FireServer("VIP_CMD", "Summon", targetPlayer)
+        else
+            print("Player not found: " .. playerName)
+        end
 
     elseif msg == ".airlock" then
         game.Players.LocalPlayer.Character.Humanoid.HipHeight = 10
