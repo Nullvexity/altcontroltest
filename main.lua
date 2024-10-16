@@ -7,7 +7,7 @@ workspace.Ignored.Drop.ChildAdded:Connect(function(drop)
         local cashPart = drop:FindFirstChildWhichIsA("BillboardGui")
         if cashPart then
             local cashText = cashPart.TextLabel.Text  -- Get the cash amount as a string
-            local cleanedCash = string.gsub(cashText, "[%$,]", "")  -- Remove $ and commas
+            local cleanedCash = string.gsub(cashText, "[^%d]", "")  -- Remove all non-digit characters
             local cashValue = tonumber(cleanedCash) or 0  -- Convert to a number
             totalCash = totalCash + cashValue
             print("Total Cash Dropped: $" .. totalCash)
@@ -17,7 +17,7 @@ end)
 
 
 game.Players:WaitForChild(getgenv().owner).Chatted:Connect(function(msg)
-    if string.sub(msg, 1, 5) == ".drop2" then
+    if string.sub(msg, 1, 5) == ".drop" then
         local amount = tonumber(string.sub(msg, 6)) or 0
         if amount > 0 then
             drop = true
@@ -67,6 +67,8 @@ game.Players:WaitForChild(getgenv().owner).Chatted:Connect(function(msg)
                         local ownerPosition = owner.Character.Head.Position
                         alt.Character:SetPrimaryPartCFrame(CFrame.new(ownerPosition + Vector3.new(positionOffset, 0, 0)))
                         positionOffset = positionOffset + 5 
+                        wait(0.5)
+                        alt.Character.HumanoidRootPart.Anchored = true
                     end
                 end
             end
