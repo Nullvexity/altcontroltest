@@ -9,7 +9,7 @@ workspace.Ignored.Drop.ChildAdded:Connect(function(drop)
             local cashText = cashPart.TextLabel.Text  -- Get the cash amount as a string
             local cleanedCash = string.gsub(cashText, "[^%d]", "") 
             local cashValue = tonumber(cleanedCash) or 0  -- Convert to a number
-            totalCash = totalCash + cashValue
+            moneydropped = moneydropped + cashValue
             print("Total Cash Dropped: $" .. totalCash)
         end
     end
