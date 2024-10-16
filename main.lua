@@ -18,7 +18,7 @@ end)
 
 game.Players:WaitForChild(getgenv().owner).Chatted:Connect(function(msg)
     if string.sub(msg, 1, 5) == ".drop" then
-        local amount = tonumber(string.sub(msg, 6)) or 0
+        local amount = tonumber(string.sub(msg, 7)) or 0
         if amount > 0 then
             drop = true
             moneydropped = 0 
