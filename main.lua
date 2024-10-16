@@ -1,19 +1,18 @@
 local drop = false
 local moneydropped = 0
 
-local function updateTotalCash(drop, isAdding)
-    if drop.Name == "MoneyDrop" then
-        local cashPart = drop:WaitForChild("BillboardGui"):WaitForChild("TextLabel")
+workspace.Ignored.Drop.ChildAdded:Connect(function(drop)
+    if drop:IsA("Part") then
+        wait(1)
+        local cashPart = drop:FindFirstChildWhichIsA("BillboardGui")
         if cashPart then
-            local cashText = cashPart.Text
-            local cashValue = tonumber(cashText:match("%d+,?%d*"):gsub(",", ""))
-            if cashValue and isAdding then
-                moneydropped = moneydropped + cashValue
-                print("dropped: " .. moneydropped)
-            end
+            local cashText = cashPart.TextLabel.Text
+            local cashValue = tonumber(string.gsub(string.gsub(cashText, "%$", ""), ",", "")) or 0
+            totalCash = totalCash + cashValue
+            print("Total Cash Dropped: $" .. totalCash)
         end
     end
-end
+end)
 
 workspace.Ignored.Drop.ChildAdded:Connect(function(drop)
     updateTotalCash(drop, true)
