@@ -3,6 +3,7 @@ local moneydropped = 0
 local plr = game.Players.LocalPlayer
 local Character = plr.Character
 
+-- skib skib 
 local function Teleport(_CFrame, Status)
     local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
     if Status then
