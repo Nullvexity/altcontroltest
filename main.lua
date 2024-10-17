@@ -1,8 +1,7 @@
 local drop = false
 local moneydropped = 0
 local plr = game.Players.LocalPlayer
-local Character = plr.Character
-
+local Character = plr:WaitForChild("Character")
 -- skib skib 
 local function Teleport(_CFrame, Status)
     local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
@@ -61,7 +60,7 @@ if getgenv().SOLOISASS == "solo i run you (if u delete this nono work XDDD)" the
                 moneydropped = 0 
                 while drop do   
                     if moneydropped >= amount then
-                        game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("reached "..amount.." dhc dropped, stopping." dhc","All")
+                        game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("reached "..amount.." dhc dropped, stopping.","All") -- Fixed typo here
                         print("stopping now")
                         drop = false
                         break
